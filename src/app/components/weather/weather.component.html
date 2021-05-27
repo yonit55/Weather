@@ -1,0 +1,37 @@
+<form [formGroup]="weatherForm" class="main-div">
+  <mat-card class="example-card">
+    <mat-card-header>
+      Check Weather
+    </mat-card-header>
+    <div formArrayName="items">
+      <div *ngFor="let item of weatherForm.get('items')['controls']; let i = index;">
+        <mat-card-content>
+          <div [formGroupName]="i">
+            <mat-form-field appearance="fill">
+              <mat-label>Select City</mat-label>
+              <mat-select formControlName="city">
+                <mat-option *ngFor="let city of cities; let i = index" [value]="city">{{ city }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Units</mat-label>
+              <input formControlName="units" placeholder="Units(standard,metric,etc)" matInput type="text" />
+            </mat-form-field>
+            <i class="material-icons" (click)="addCity(item)">add</i>
+          </div>
+        </mat-card-content>
+        <mat-card-content>
+          <app-weather-results [isAllResult]="false" *ngIf="weatherResult.length && weatherResult[i]" [item]="weatherResult[i]">
+          </app-weather-results>
+        </mat-card-content>
+      </div>
+    </div>
+    <mat-card-content>
+      Weather in:
+      <div *ngFor="let item of weatherResult">
+        <app-weather-results [isAllResult]="true" [item]="item"></app-weather-results>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</form>

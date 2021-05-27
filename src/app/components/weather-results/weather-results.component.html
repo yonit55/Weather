@@ -1,0 +1,14 @@
+<div>
+    <div>
+        {{item?.name}}
+        {{item?.wind.deg}}
+        <label *ngIf="isAllResult">
+            {{item?.weather[0].main}}
+        </label>
+        <div *ngIf="!isAllResult">
+            <img src="http://openweathermap.org/img/w/{{item?.weather[0].icon}}.png">
+        </div>
+    </div>
+    <div>
+    </div>
+</div>
